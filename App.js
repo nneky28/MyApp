@@ -7,15 +7,12 @@ import DrawerStack from './src/navigations/DrawerStack';
 import AuthStack from './src/navigations/AuthStack';
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from './src/components/Loader';
-import DashBoard from './src/screens/DashBoard';
-import Details from './src/components/Details';
-import Tab_Pills from './src/components/Tab_Pills';
-
 import { Text, ScrollView, View } from 'react-native'
-import TabPills from './src/components/TabPills';
+import { QueryClient, QueryClientProvider, useQuery } from 'react-query'
 
 
 
+const queryClient = new QueryClient()
 const App = () => {
 
   const [isLoading, setIsLoading] = useState(true);
@@ -25,47 +22,43 @@ const App = () => {
   const dispatch = useDispatch();
 
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setIsLoading(false)
-  //   }, 1000);
-  // }, [])
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false)
+    }, 1000);
+  }, [])
 
-  // if (isLoading) {
-  //   return <Splash />
-  // }
+  if (isLoading) {
+    return <Splash />
+  }
 
 
   const RootStack = createNativeStackNavigator()
 
-  // const RootScreen = () => (
+  const RootScreen = () => (
 
-  //   <RootStack.Navigator screenOptions={{ headerShown: false }} initialRouteName='Home'>
-  //     {route === 'Home' ? (
-  //       <RootStack.Screen name="Home" component={DrawerStack} />
+    <RootStack.Navigator screenOptions={{ headerShown: false }} initialRouteName='Home'>
 
-  //     ) : (
+      {route === 'Home' ? (
+        <RootStack.Screen name="Home" component={DrawerStack} />
+      ) : (
 
-  //       // <RootStack.Screen name='User' component={AuthStack} />
-  //       // <RootStack.Screen name='Details' component={Details} />
+        <RootStack.Screen name='User' component={AuthStack} />
 
-  //     )}
-  //   </RootStack.Navigator>
-  // )
+      )}
+    </RootStack.Navigator>
+  )
 
 
 
 
   return (
-
-
-    <NavigationContainer>
-      {/* <Loader /> */}
-      {/* <RootScreen /> */}
-      {/* <Tab_Pills />
-    */}
-      <TabPills />
-    </NavigationContainer>
+    <QueryClientProvider client={queryClient}>
+      <NavigationContainer>
+        <Loader />
+        <RootScreen />
+      </NavigationContainer>
+    </QueryClientProvider>
 
   )
 };

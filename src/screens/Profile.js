@@ -1,14 +1,12 @@
-import { Text } from 'react-native'
+import { Text, View } from 'react-native'
 import React from 'react'
-import ScreensContainer from './../components/ScreensContainer';
-import PeopleCard from '../components/PeopleCard';
+import { globalStyles } from '../styles/global';
 
 const Profile = () => {
   return (
-    <ScreensContainer  >
-      <Text>Profile</Text>
-      {/* <PeopleCard /> */}
-    </ScreensContainer>
+    <View style={globalStyles.tabsContainer} >
+      <Text style={globalStyles.tabsTitle}>Profile...</Text>
+    </View>
   )
 }
 

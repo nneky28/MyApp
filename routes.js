@@ -9,7 +9,7 @@ LogBox.ignoreAllLogs(true);
 const MainApp = () => {
 
     useEffect(() => {
-        LogBox.ignoreAllLogs(true);
+        // LogBox.ignoreAllLogs(true);
     }, [])
 
     return (

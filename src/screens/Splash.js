@@ -39,7 +39,8 @@ const Splash = () => {
                 {/* <Image source={require('../assets/images/icons/bg.png')}
                     style={style.resize}
                 /> */}
-                <ActivityIndicator color='#000' size={28} />
+                {/* <ActivityIndicator color='#000' size={28} /> */}
+                <ActivityIndicator color={AppColors.green} size={20} />
             </View>
         </ScreensContainer>
     )

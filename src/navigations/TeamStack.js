@@ -1,12 +1,11 @@
 import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Team from './../screens/Team';
-import DashBoard from './../screens/DashBoard';
 import Modules from './../screens/Modules';
 import Notification from './../screens/Notification';
 import Profile from './../screens/Profile';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import HomeScreen from './../screens/HomeScreen';
 
 const TeamStack = () => {
 
@@ -20,7 +19,7 @@ const TeamStack = () => {
                     () => (
                         <Tabs.Navigator screenOptions={{ headerShown: false }}>
 
-                            <Tabs.Screen name="DashBoard" component={DashBoard} options={{
+                            <Tabs.Screen name="DashBoard" component={HomeScreen} options={{
 
                                 tabBarIcon: () => <Ionicons name="home-outline" size={25} />
                             }} />

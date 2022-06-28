@@ -103,7 +103,7 @@ export const globalStyles = StyleSheet.create({
         textAlign: 'center',
         color: '#2898A4',
         marginTop: 5,
-        fontWeight: '700'
+        fontFamily: "black-sans-condensed-bold",
     },
     eyes: {
         top: -35,

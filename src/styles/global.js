@@ -1,6 +1,5 @@
 import { StyleSheet, Platform, NativeModules, Dimensions } from "react-native";
 import AppColors from "./AppColors";
-import { FontFamily } from "../utils/FontFamily";
 import { width, height } from 'react-native-dimension';
 
 
@@ -24,26 +23,97 @@ export const globalStyles = StyleSheet.create({
         borderWidth: 1,
         marginTop: height(1.5)
     },
-
-    teamContent: {
-        width: width(43),
-        borderColor: AppColors.gray1,
-        backgroundColor: AppColors.white,
-        borderWidth: 1,
-        borderRadius: 6,
-        paddingVertical: height(8),
+    emptyListStyle: {
+        padding: 10,
+        fontSize: 18,
+        textAlign: 'center',
+    },
+    tabsContainer: {
         alignItems: 'center',
-        elevation: 20,
-        shadowColor: '#52006A',
-        marginTop: height(6),
+        justifyContent: 'center',
+        flex: 1
+    },
+    tabsTitle: {
+        fontSize: width(10),
+        color: AppColors.black1,
+        fontFamily: "black-sans-condensed-bold",
+        textAlign: 'center',
+        textTransform: 'uppercase'
     },
 
-    // teamContainer: {
-    //     flex: 1,
-    //     flexDirection: 'row',
-    //     flexWrap: 'wrap',
-    //     backgroundColor: '#000'
-    // },
+    ModalContainer: {
+        flexDirection: 'row',
+        backgroundColor: AppColors.white,
+        width: width(25),
+        paddingHorizontal: width(20),
+        alignItems: 'center',
+        alignSelf: 'center',
+        borderRadius: width(1.5),
+        borderColor: AppColors.grayBorder,
+        borderWidth: 1,
+        marginTop: height(1.5),
+        height: height(20),
+        justifyContent: 'center'
+    },
+    loading: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        // flex: 1
+
+    },
+
+    uncheckIcon: {
+        width: width(3),
+        height: height(2),
+        tintColor: AppColors.black1,
+        marginRight: width(8)
+    },
+    loader: {
+        flex: 1,
+        justifyContent: "center",
+        padding: width(2),
+
+    },
+
+    teamContent: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderColor: AppColors.grayBorder,
+        borderWidth: 1,
+        borderRadius: width(3),
+        paddingVertical: height(3.5),
+        width: width(43.25),
+
+    },
+    birthdayCard: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        borderColor: AppColors.gray,
+        borderWidth: 1,
+        borderRadius: width(1),
+        paddingHorizontal: width(4),
+        width: width(40),
+        backgroundColor: '#eee',
+        marginLeft: width(3),
+        marginTop: height(2),
+        paddingVertical: height(1)
+    },
+
+    assetsCard: {
+        flexDirection: 'row',
+        paddingHorizontal: width(6),
+        paddingVertical: height(2)
+    },
+    assetsButton: {
+        marginRight: width(7),
+    },
+
+    teamContainer: {
+        width: width(43),
+        alignItems: 'center',
+        margin: width(2),
+        marginBottom: height(16)
+    },
 
     inputStyle: {
         width: width(90),
@@ -58,16 +128,16 @@ export const globalStyles = StyleSheet.create({
         fontSize: width(2.75),
         color: AppColors.black3,
         marginLeft: width(5),
-        fontFamily: FontFamily.BlackSansRegular
+        fontFamily: "black-sans-condensed-Regular",
     },
 
+
     textMe: {
-        marginTop: 15,
         fontSize: width(4),
         color: AppColors.black1,
-        marginRight: width(2),
-        textAlign: 'center',
-        fontWeight: 'bold'
+        fontFamily: "black-sans-condensed-bold",
+        marginTop: height(1),
+        textAlign: 'center'
     },
     searchIcon: {
         width: width(4),
@@ -76,6 +146,7 @@ export const globalStyles = StyleSheet.create({
     mainViewContainer: {
         backgroundColor: AppColors.white,
         alignItems: 'center',
+
     },
     mainViewContainer2: {
         backgroundColor: AppColors.white,
@@ -100,10 +171,26 @@ export const globalStyles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
+
     },
-    leftIcon: {
+    header2: {
+        width: width(100),
+        paddingHorizontal: width(5),
+        marginTop: height(2),
+        marginBottom: height(1.5),
+        flexDirection: 'row',
+        alignItems: 'center',
+
+    },
+
+    leftIcon1: {
         width: width(5),
-        height: width(5),
+        height: width(3),
+    },
+
+    leftIcon: {
+        width: width(9),
+        height: width(9),
     },
     rightIcon: {
         width: width(5),
@@ -112,27 +199,55 @@ export const globalStyles = StyleSheet.create({
     screenTitle: {
         fontSize: width(4),
         color: AppColors.black1,
-        fontFamily: FontFamily.BlackSansBold,
+        fontFamily: "black-sans-condensed-bold",
+    },
+    headerIcon: {
+        // backgroundColor: AppColors.black
+    },
+    iconText: {
+        fontSize: width(5),
+        // fontFamily: FontFamily.BlackSansBold,
+        fontWeight: 'bold',
+        color: AppColors.black,
+        // marginLeft: width(3)
+        padding: width(1)
     },
     screenTitle1: {
         fontSize: width(4),
         color: AppColors.black1,
-        fontFamily: FontFamily.BlackSansBold,
+        fontFamily: 'BlackSans-Bold',
         marginLeft: 100
     },
 
+    screenDetails: {
+        alignSelf: 'center',
+        justifyContent: 'center',
+        width: width(80),
+        alignItems: 'center',
+        marginLeft: width(20)
+
+
+    },
+
+    userInfo: {
+        marginTop: height(3),
+        marginBottom: height(2),
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
 
     selectedHeading: {
         fontSize: width(3.4),
-        paddingRight: width(5),
+        // paddingRight: width(4),
         color: AppColors.green,
-        fontFamily: FontFamily.BlackSansSemiBold,
+        fontFamily: "black-sans-SemiBold",
     },
+
     heading: {
         fontSize: width(3.4),
         color: AppColors.black1,
         paddingHorizontal: width(7),
-        fontFamily: FontFamily.BlackSansRegular,
+        fontFamily: "black-sans-condensed-Regular",
     },
     scrollViewContainer: {
         paddingTop: height(2),
@@ -142,8 +257,18 @@ export const globalStyles = StyleSheet.create({
     line: {
         width: '100%',
         height: 1,
-        backgroundColor: AppColors.gray1,
+        backgroundColor: AppColors.grayBorder,
         marginTop: height(1),
+        elevation: 0,
+
+    },
+    compLine: {
+        width: width(78),
+        marginLeft: width(2),
+        // marginRight: width(51),
+        height: 1,
+        backgroundColor: AppColors.grayBorder,
+
         elevation: 0,
     },
     line2: {
@@ -151,6 +276,15 @@ export const globalStyles = StyleSheet.create({
         height: 1,
         backgroundColor: AppColors.gray1,
         elevation: 0,
+    },
+    line3: {
+        width: '100%',
+        height: 1,
+        backgroundColor: AppColors.grayBorder,
+        marginTop: height(1),
+        elevation: 0,
+        marginTop: height(-11)
+
     },
     animated: {
         width: '80%',
@@ -161,10 +295,23 @@ export const globalStyles = StyleSheet.create({
         borderTopLeftRadius: 15,
         marginLeft: width(3.5)
     },
+
+    animated2: {
+        width: '80%',
+        backgroundColor: AppColors.green,
+        height: height(0.8),
+        marginTop: height(1),
+        borderTopRightRadius: 15,
+        borderTopLeftRadius: 15,
+        marginLeft: width(5),
+
+
+
+    },
     heading1: {
         fontSize: width(4),
         color: AppColors.black1,
-        fontFamily: FontFamily.BlackSansBold,
+        fontFamily: "black-sans-condensed-bold",
     },
     headingContainer: {
         marginTop: height(2),
@@ -174,33 +321,64 @@ export const globalStyles = StyleSheet.create({
         justifyContent: 'space-between',
 
     },
-    listItemContainer: {
-        // touched width 90-43
+    listItemContainer2: {
         width: width(90),
         borderColor: AppColors.gray1,
         backgroundColor: AppColors.white,
         borderWidth: 1,
         borderRadius: 6,
-        paddingVertical: height(1),
+        paddingVertical: height(2),
         paddingHorizontal: width(3),
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        marginBottom: width(4)
-        // added mb
+        elevation: 2,
+        shadowColor: 'gray',
     },
+
+    listItemContainer: {
+        width: width(90),
+        backgroundColor: AppColors.white,
+        paddingVertical: height(1),
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between'
+
+
+    },
+    giftIcon: {
+        padding: width(1.2)
+    },
+
+    listItemContainer3: {
+        width: width(82),
+        borderColor: AppColors.gray1,
+        backgroundColor: AppColors.white,
+        paddingHorizontal: width(4),
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        marginBottom: height(1),
+        marginTop: height(3),
+        borderWidth: width(0.2),
+        borderColor: '#FF7372',
+        marginLeft: width(4),
+        padding: width(2),
+        borderRadius: width(3)
+
+    },
+
     scrollViewWrapper: {
-        flexGrow: 1,
-        paddingBottom: 60
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+
     },
 
 
     detailsContainer: {
         backgroundColor: AppColors.white,
-        flexGrow: 1,
-        // height: height(90),
+        flexGrow: 1
 
-        // backgroundColor: 'red'
     },
     avatarStyle3: {
         height: height(15),
@@ -219,15 +397,53 @@ export const globalStyles = StyleSheet.create({
     },
 
     avatarStyle: {
+        height: height(8),
+        width: height(8),
+        borderRadius: height(4.75)
+    },
+    avatarStyle4: {
         height: height(5),
         width: height(5),
         borderRadius: height(4.75),
+        marginTop: height(1)
+
+
+    },
+
+    assetsImage: {
+        height: height(13),
+        width: height(18),
+
+
+    },
+
+    avatarStyleContainer: {
+        justifyContent: 'center',
+        alignItems: 'center'
 
     },
     textContainer: {
         justifyContent: 'space-between',
         height: height(5),
-        marginLeft: width(2)
+        marginLeft: width(2),
+        marginTop: height(1.5),
+
+    },
+    textContent: {
+        justifyContent: 'space-between',
+        marginLeft: width(4),
+        // marginTop: height(1.5),
+        paddingHorizontal: width(1)
+    },
+
+    textAssets: {
+        justifyContent: 'space-between',
+        paddingHorizontal: width(6)
+    },
+    outFooter: {
+        marginTop: height(3),
+        marginBottom: height(3),
+        alignItems: 'center'
     },
 
     flatListIcon: {
@@ -244,7 +460,7 @@ export const globalStyles = StyleSheet.create({
     heading2: {
         fontSize: width(3),
         marginRight: width(2),
-        fontFamily: FontFamily.BlackSansBold,
+        fontFamily: "black-sans-condensed-bold",
         color: AppColors.black2,
     },
     downIcon: {
@@ -286,38 +502,58 @@ export const globalStyles = StyleSheet.create({
     subText: {
         fontSize: width(2.5),
         color: AppColors.black1,
-        fontFamily: FontFamily.BlackSansRegular,
+        fontFamily: "black-sans-condensed-Regular",
     },
     titleText: {
         fontSize: width(3),
         color: AppColors.black1,
-        marginRight: width(2),
-        fontFamily: FontFamily.BlackSansBold,
+        marginTop: height(0.5),
+        fontFamily: "black-sans-Regular",
+    },
+
+    mac: {
+        fontSize: width(3),
+        color: AppColors.black1,
+        marginTop: height(0.5),
+        fontFamily: "black-sans-Regular",
+
+    },
+    apple: {
+        fontSize: width(3),
+        height: height(5),
+        fontFamily: "black-sans-semi-bold",
+    },
+    nameText: {
+        fontSize: width(4),
+        color: AppColors.black1,
+        fontFamily: "black-sans-condensed-bold",
+        marginTop: height(1),
+        textAlign: 'center'
     },
     roleText: {
         fontSize: width(5),
         color: AppColors.black1,
         alignSelf: 'center',
-        fontWeight: 'bold'
+        fontFamily: "black-sans-condensed-bold",
     },
     role: {
         fontSize: width(4),
         color: AppColors.black1,
         alignSelf: 'center',
-        fontFamily: FontFamily.BlackSansBold,
+        fontFamily: "black-sans-condensed-bold",
     },
 
     subRole: {
-        fontSize: width(4),
+        fontSize: width(3),
         color: AppColors.black1,
         alignSelf: 'center',
-        fontWeight: 'bold',
+        fontFamily: "black-sans-condensed-bold",
         alignSelf: 'center'
     },
 
     detailsButton: {
         width: width(90),
-        borderColor: AppColors.gray1,
+        borderColor: AppColors.grayBorder,
         backgroundColor: AppColors.white,
         borderWidth: 1,
         borderRadius: 25,
@@ -334,8 +570,15 @@ export const globalStyles = StyleSheet.create({
     report: {
         fontSize: width(4),
         color: AppColors.black1,
-        fontWeight: 'bold',
-        marginBottom: 5
+        fontFamily: "black-sans-condensed-bold",
+        marginBottom: height(2)
+    },
+
+    report2: {
+        fontSize: width(4),
+        color: AppColors.black1,
+        fontFamily: "black-sans-condensed-bold",
+        marginBottom: height(2)
     },
 
 
@@ -351,7 +594,7 @@ export const globalStyles = StyleSheet.create({
     smallText: {
         fontSize: width(2.25),
         color: AppColors.white,
-        fontFamily: FontFamily.BlackSansRegular,
+        fontFamily: "black-sans-condensed-Regular",
     },
     searchBoxContainer: {
         width: width(90),
@@ -360,16 +603,81 @@ export const globalStyles = StyleSheet.create({
         alignItems: 'center'
     },
     searchBoxStyle: {
-        width: width(79),
+        width: width(90),
         alignSelf: 'flex-start'
     },
 
     // people style ends
+    scrolls: {
+        alignItems: 'center',
+        // marginBottom: height(35)
+    },
 
     // login screen starts 
+    text: {
+        fontSize: width(4.5),
+        color: AppColors.black1,
+        fontFamily: "black-sans-condensed-bold",
+        marginTop: height(5),
+        marginLeft: '5%',
+    },
 
+    text3: {
+        fontSize: width(3.4),
+        color: AppColors.black1,
+        fontFamily: "black-sans-condensed-Regular",
+        marginLeft: '5%',
+    },
+    text2: {
+        fontSize: width(2.9),
+        color: AppColors.black1,
+        fontFamily: "black-sans-condensed-Regular",
+    },
+    lineBar: {
+        width: '100%',
+        height: 1,
+        backgroundColor: AppColors.gray,
+        marginTop: height(1),
+        elevation: 0
+    },
+    barOption: {
+        flex: 1,
+        alignItems: 'flex-end',
 
+    },
+    icon1: {
+        width: width(5),
+        height: width(5),
+        tintColor: AppColors.black1,
+    },
+    icon: {
+        width: width(3),
+        height: width(3),
+        tintColor: AppColors.black1,
+    },
 
+    row: { flexDirection: 'row', alignItems: 'center' },
+    row1: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        width: '100%',
+        paddingHorizontal: '5%',
+        marginTop: height(3),
+        marginBottom: height(2)
+    },
+    margin: { marginLeft: '7%', width: '65%' },
+
+    horizontalListContainer: {
+        width: width(35),
+        height: height(17),
+        paddingHorizontal: width(2),
+        paddingVertical: height(1)
+    },
+    headingText: {
+        fontSize: width(3),
+        color: AppColors.black1,
+        fontFamily: "black-sans-condensed-bold",
+    },
 
 
 })

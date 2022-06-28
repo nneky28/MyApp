@@ -1,8 +1,8 @@
-import {LOGIN, LOGOUT} from '../Types';
+import { LOGIN, LOGOUT } from '../Types';
 const intialState = {
   user: null,
-  isLogin: false,
-  route : "splash"
+  isLoggedin: false,
+  route: "splash"
 };
 const reducer = (state = intialState, action) => {
   switch (action.type) {
@@ -10,7 +10,7 @@ const reducer = (state = intialState, action) => {
       return {
         ...state,
         user: {},
-        isLogin: true,
+        isLoggedin: true,
         ...action.payload
       };
     }
@@ -18,7 +18,7 @@ const reducer = (state = intialState, action) => {
       return {
         ...state,
         user: {},
-        isLogin: false,
+        isLoggedin: false,
       };
     }
     default:

@@ -10,10 +10,15 @@ import { setLoaderVisible } from '../../Redux/Actions/Config';
 import { employees_me, getAPIs, postNoToken } from '../../utils/Api';
 import { ToastError, ToastSuccess, storeData } from '../../utils/Method'
 import Button from './../../components/Button/index';
+import { loginUser, APIFunction } from './../../utils/MyApi';
+import { useMutation } from 'react-query';
+import Loader from './../../components/Loader';
+import { useQueryClient } from 'react-query';
 
 
 
 const LoginScreen = ({ route, navigation }) => {
+
     const auth = useSelector((state) => state.Auth);
     const dispatch = useDispatch();
 
@@ -28,6 +33,41 @@ const LoginScreen = ({ route, navigation }) => {
     const [password, setPassword] = useState('')
 
 
+
+    // const [mutate, { isSuccess, isLoading, isError }] = useMutation((fd) => APIFunction.login(fd))
+    const mutation = useMutation((fd) => APIFunction.login(fd))
+
+    console.log('status', mutation.status)
+    if (mutation.status === 'loading') {
+        // return <Text>Loading...</Text>
+
+    }
+
+    // const handleSubmit = async () => {
+    //     if (!email || email.trim() === '' || !password || password.trim() === '') {
+    //         return ToastError("All fields are required")
+    //     }
+    //     // dispatch(setLoaderVisible(true));
+    //     const fd = { email, password }
+    //     console.log('details', fd)
+    //     mutation.mutate(fd)
+
+
+    //     if (mutation.isSuccess) {
+    //         // dispatch(setLoaderVisible(true));
+    //         queryClient.invalidateQueries()
+    //         ToastSuccess("Login was successful")
+    //         return dispatch(login({ ...auth, user: { userName: "Joe" }, route: "Home", isLoggedin: true }));
+
+    //     }
+    //     if (mutation.error) {
+    //         let message = 'invalid_credentials';
+    //         ToastError(message)
+    //         dispatch(setLoaderVisible(false));
+    //     }
+
+
+    // }
 
     const handleSubmit = async () => {
         if (!email || email.trim() === '' || !password || password.trim() === '') {
@@ -54,7 +94,7 @@ const LoginScreen = ({ route, navigation }) => {
             if (!business) return ToastError("No business connected to this account");
             let employees_me_url = employees_me(business.business_id);
             let about_me = await getAPIs(employees_me_url, token);
-            // console.log('>>>>>>>', about_me)
+            console.log('>>>>>>>', about_me)
             await storeData("refresh", refresh);
             await storeData("about_me", about_me)
             await storeData("user", userInfo.user);
@@ -84,6 +124,7 @@ const LoginScreen = ({ route, navigation }) => {
 
     return (
         <KeyboardAvoidingScrollView justifyContent='center' >
+
             <View style={globalStyles.container}>
                 <View style={globalStyles.body}>
                     <View style={globalStyles.edgeLogo}>
@@ -111,8 +152,9 @@ const LoginScreen = ({ route, navigation }) => {
                         icon
                     />
 
+
                     <Button title={'SIGN IN'} onPress={() => handleSubmit()} />
-                    {/* <TouchableOpacity onPress={() => handleSubmit()}><Text>Hello</Text></TouchableOpacity> */}
+
                     <Text style={globalStyles.password}>Forgot Password?</Text>
                 </View>
 

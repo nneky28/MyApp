@@ -1,7 +1,7 @@
 import axios from "axios";
 import moment from "moment";
 import { getData, getStoredBusiness, storeData } from "./Method";
-
+import { useQuery } from "react-query";
 export const endPoint = 'https://coolowo.com';
 // export const endPoint = 'https://api.bizedgeapp.com';
 
@@ -9,16 +9,15 @@ export const employees_me = (business_id) => `/c/${business_id}/employees/me/`;
 export const APIFunction = {
     my_business_assests: (business_id, employee_pk) => `/c/${business_id}/employees/${employee_pk}/asset_vehicles/`,
     benefits: (business_id, employee_pk) => `/c/${business_id}/employees/${employee_pk}/benefits/`,
-    whos_out: (business_id, status) => `/c/${business_id}/timeoff_taken/widgets/whos_out/?status=${status}`,
+    whos_out: (business_id, category = "timeoff") => `/c/${business_id}/timeoff_taken/widgets/whos_out/?category=${category}`,
     birthdays: (business_id, status) => `/c/${business_id}/employees/dashboard/birthdays/?status=${status}`,
-    employees: (business_id, page = 1) => `/c/${business_id}/employees/?page=${page}`,
+    employees: (business_id, page = 1, search = "") => `/c/${business_id}/employees/?page=${page}&search=${search}`,
     team_members: (business_id, id, page = 1) => `/c/${business_id}/employees/${id}/team_members/?page=${page}`,
     basic_details: (business_id, id) => `/c/${business_id}/employees/${id}/basic_detail/`,
     next_of_kins: async (id) => {
         let biz = await getStoredBusiness();
         return getAPIs(`/c/${biz.business_id}/employees/${id}/next-of-kin/`)
     },
-
     emergency: async (id) => {
         let biz = await getStoredBusiness();
         return getAPIs(`/c/${biz.business_id}/employees/${id}/emergency-contact/`)
@@ -43,6 +42,10 @@ export const APIFunction = {
         let biz = await getStoredBusiness();
         return getAPIs(`/c/${biz.business_id}/employees/notifications/?page=${page}`)
     },
+    unseen_count: async (page = 1) => {
+        let biz = await getStoredBusiness();
+        return getAPIs(`/c/${biz.business_id}/employees/notifications/unseen_count/`)
+    },
     change_password: async (fd) => postAPIs(`/accounts/auth/password/change/`, fd),
     pension_providers: async () => {
         let biz = await getStoredBusiness();
@@ -60,8 +63,16 @@ export const APIFunction = {
         let biz = await getStoredBusiness();
         return postAPIs(`/c/${biz.business_id}/employees/${id}/update_pension_bank_account/`, fd)
     },
-    about_me: async () => {
-        let biz = await getStoredBusiness();
+    about_me: async (biz_id = null) => {
+        let biz = {}
+        if (biz_id) {
+            biz = {
+                business_id: biz_id
+            }
+        }
+        if (!biz_id) {
+            biz = await getStoredBusiness();
+        }
         return getAPIs(`/c/${biz.business_id}/employees/me/`);
     },
     read_notification: async (id) => {
@@ -70,8 +81,100 @@ export const APIFunction = {
     },
     bank_verification: async (fd) => {
         let biz = await getStoredBusiness();
-        return postAPIs(`/banks/account_number_validation/`, fd)
+        return postAPIs(`/c/${biz.business_id}/banks/account_number_validation/`, fd)
+    },
+    seen_all: async () => {
+        let biz = await getStoredBusiness();
+        return postAPIs(`/c/${biz.business_id}/employees/notifications/seen_all/`)
+    },
+    remove_photo: async (employee_id) => {
+        let biz = await getStoredBusiness();
+        return putAPIs(`/c/${biz.business_id}/employees/${employee_id}/delete-photo/`)
+    },
+    employee_tasks: async (employee_id, completed = false) => {
+        let biz = await getStoredBusiness()
+        return getAPIs(`/c/${biz.business_id}/employees/${employee_id}/onboarding_tasks/?is_completed=${completed}`)
+    },
+    toggle_completed: async (employee_id, task_id, fd) => {
+        let biz = await getStoredBusiness()
+        return putAPIs(`/c/${biz.business_id}/employees/${employee_id}/onboarding_tasks/${task_id}/toggle_completed/`, fd)
+    },
+    employee_doc: async (id) => {
+        let biz = await getStoredBusiness()
+        return getAPIs(`/c/${biz.business_id}/employees/${id}/documents/`)
+    },
+    report_asset: async (fd, id) => {
+        let biz = await getStoredBusiness()
+        return postAPIs(`/c/${biz.business_id}/asset-management/assets/${id}/issues/report/`, fd)
+    },
+    user_info: async () => {
+        return getAPIs(`/accounts/auth/user/`)
+    },
+    onboarded: async (employee_id) => {
+        let biz = await getStoredBusiness()
+        return postAPIs(`/c/${biz.business_id}/employees/${employee_id}/complete_user_onboarding/`)
+    },
+    attendance_config: async () => {
+        let biz = await getStoredBusiness()
+        return getAPIs(`/c/${biz.business_id}/attendance_config/`)
+    },
+    attendance_status: async () => {
+        let biz = await getStoredBusiness()
+        return getAPIs(`/c/${biz.business_id}/attendance/status/`)
+    },
+    employee_clock_in: async (fd) => {
+        let biz = await getStoredBusiness()
+        return postAPIs(`/c/${biz.business_id}/attendance/clock_in/`, fd)
+    },
+    employee_clock_out: async (fd) => {
+        let biz = await getStoredBusiness()
+        return postAPIs(`/c/${biz.business_id}/attendance/clock_out/`, fd)
+    },
+    payslip_info: async (date, payroll_id) => {
+        let biz = await getStoredBusiness()
+        return getAPIs(`/c/${biz.business_id}/employee_payroll_month_history/${date}/payslip/?payroll=${payroll_id}`)
+    },
+    payroll_history: async (year) => {
+        let biz = await getStoredBusiness()
+        return getAPIs(`/c/${biz.business_id}/employee_payroll_year_history/?year=${year}`)
+    },
+    payroll_years: async () => {
+        let biz = await getStoredBusiness()
+        return getAPIs(`/c/${biz.business_id}/employee_payroll_year_history/years/`)
+    },
+    location_type: async () => {
+        let biz = await getStoredBusiness()
+        return getAPIs(`/c/${biz.business_id}/attendance/location_type/`)
+    },
+    error_report: async (fd) => {
+        return postNoToken('/mobile_error_report', fd)
     }
+}
+
+export const useFetchPayrollYears = () => {
+    return useQuery("payroll_years", APIFunction.payroll_years)
+}
+
+export const useFetchAttendanceConfig = () => {
+    return useQuery("attendance_config", APIFunction.attendance_config)
+}
+export const useFetchAttendanceStatus = () => {
+    return useQuery("attendance_status", APIFunction.attendance_status)
+}
+export const useFetchLocationType = () => {
+    return useQuery("location_type", APIFunction.location_type)
+}
+
+export const useFetchPayslipInfo = (date, id) => {
+    return useQuery(["payslip_info", date, id], () => APIFunction.payslip_info(date, id), {
+        enabled: date !== null && date !== undefined && id !== null && id !== undefined
+    })
+}
+
+export const useFetchPayrollHistory = (year) => {
+    return useQuery(["payroll_history", year], () => APIFunction.payroll_history(year), {
+        enabled: year !== null && year !== undefined && year !== ""
+    })
 }
 export const getAPIs = async (path, token) => {
     let expiry = await getData("token_expiry");

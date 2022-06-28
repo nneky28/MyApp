@@ -16,6 +16,8 @@ const AppColors = {
     darkGray: '#A8A8A8',
     blue1: '#C2D4FF',
     blue2: '#99E6FF',
+    blue3: '#32BEEB',
+    blue4: '#E0EEF0',
     lightOrange: '#FCE2AF',
     smallShadow: {
         shadowColor: '#FAFAFA',
@@ -40,9 +42,14 @@ const AppColors = {
 };
 
 export const ColorList = [
+    '#ffffff',
     "#FFE7E7",
     "#C2D4FF",
     "#FCE2AF",
-    "#99E6FF"
+    "#99E6FF",
+    '#99E6FF',
+    '#32BEEB',
+    '#E5E5E5'
+
 ]
 export default AppColors;

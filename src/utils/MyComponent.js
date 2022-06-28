@@ -1,7 +1,7 @@
 import React from 'react';
 import ContentLoader, { BulletList, Facebook } from 'react-content-loader/native'
 import LottieView from 'lottie-react-native';
-import { Text } from 'react-native';
+import { Text, Image } from 'react-native';
 import Svg, {
     Circle,
     Ellipse,
@@ -26,10 +26,10 @@ import Svg, {
 } from 'react-native-svg';
 import AppColors from '../styles/AppColors';
 import { View, Dimensions } from 'react-native';
-import { FontFamily } from './FontFamily';
 import { height, width } from 'react-native-dimension';
 import { ActivityIndicator, TouchableRipple } from 'react-native-paper';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { globalStyles } from '../styles/global';
 
 const winDimensions = Dimensions.get("window")
 const winWidth = winDimensions.width;
@@ -105,7 +105,7 @@ export const P = (props) => (
     <Text
         style={{
             fontSize: props.fontSize || width(3.5),
-            fontFamily: FontFamily.BlackSansRegular,
+            fontFamily: "black-sans-condensed-Light",
             textAlign: props.textAlign,
             ...props.style
         }}
@@ -117,8 +117,8 @@ export const P = (props) => (
 export const H1 = (props) => (
     <Text
         style={{
-            fontSize: width(props.fontSize) || width(4),
-            fontFamily: FontFamily.BlackSansBold,
+            fontSize: width(props.fontSize) || width(3),
+            fontFamily: "black-sans-condensed-bold",
             color: props.color || 'black',
             textAlign: props.textAlign,
             ...props.style
@@ -128,28 +128,42 @@ export const H1 = (props) => (
     </Text>
 )
 
+
 export const SizedBox = (props) => (
     <View
         style={{
-            height: height(props.size || 1)
+            height: height(props.size || 1),
+            backgroundColor: props.backgroundColor || AppColors.white
         }}
     />
 )
+export const ItemWithText = ({ icon, text, onPress }) => {
+    return (
+        <TouchableOpacity
+            style={globalStyles.row1}
+            onPress={onPress}
+            activeOpacity={0.8}>
+            <Image source={icon} resizeMode="contain" style={globalStyles.icon1} />
+            <Text style={globalStyles.text3}>{text}</Text>
+        </TouchableOpacity>
+    );
+};
 
 export const Container = (props) => (
     <View
         style={{
-            flex: props.flex || 0,
+            flex: props.flex || 1,
             width: props.width ? width(props.width) : props.widthPercent ? props.widthPercent : '100%',
             padding: props.padding ? width(props.padding) : height(2),
             paddingVertical: props.paddingVertical ? height(props.paddingVertical) : height(0),
             paddingHorizontal: props.paddingHorizontal ? width(props.paddingHorizontal) : width(0),
             marginTop: props.marginTop ? height(props.marginTop) : 0,
-            marginLeft: props.marginLeft,
+            marginLeft: props.marginLeft ? width(props.marginLeft) : 0,
             paddingTop: props.paddingTop ? height(props.paddingTop) : 0,
             paddingRight: props.paddingRight ? width(props.paddingRight) : 0,
             marginRight: props.marginRight ? width(props.marginRight) : 0,
             backgroundColor: props.backgroundColor || AppColors.white,
+            // marginBottom: props.marginBottom || height(1),
             ...props.style
         }}
     >
@@ -194,8 +208,10 @@ export const Width = (val) => {
 export const Rounded = (props) => (
     <Container
         style={{
-            width: Width(props.size || 15),
-            height: Width(props.size || 15),
+            // width: Width(props.size || 5),
+            // height: Width(props.size || 5),
+            width: height(10),
+            height: height(10),
             borderRadius: 50,
             backgroundColor: props.backgroundColor || AppColors.green,
             justifyContent: "center",
@@ -203,5 +219,40 @@ export const Rounded = (props) => (
         }}
     >
         {props.children}
+    </Container>
+)
+export const EmptyStateWrapper = (props) => (
+    <Container
+        marginTop={props.marginTop || 8}
+        style={{
+            alignItems: "center",
+            backgroundColor: props.backgroundColor || AppColors.white
+        }}
+    >
+        <ImageWrap
+            url={props.icon}
+            height={props.height || 30}
+            fit="contain"
+        />
+        <SizedBox height={props?.spacing || 2} />
+        {
+            props.header_1 ? (
+                <H1
+                    color={AppColors.black3}
+                    fontSize={5}
+                >{props.header_1}</H1>
+            ) : null
+        }
+        <SizedBox height={props?.spacing || 2} />
+        {
+            props.header_2 ? <React.Fragment>
+                <H1 color={AppColors.black3}
+                    fontSize={5}>{props.header_2}</H1>
+                <SizedBox height={props?.spacing || 2} />
+            </React.Fragment> : null
+        }
+        {
+            props.sub_text ? <P color={AppColors.black2}>{props.sub_text}</P> : null
+        }
     </Container>
 )
